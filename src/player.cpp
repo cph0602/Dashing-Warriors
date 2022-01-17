@@ -162,8 +162,8 @@ void Player::update(int** map)
 					}
 					else if(map[blockpos.x+1][blockpos.y]==3||map[blockpos.x+1][blockpos.y]==103)
 						map[blockpos.x+1][blockpos.y] -= 1;
-					pos.x = blockpos.x*40;
-					pos.y = blockpos.y*40;
+					pos.x = blockpos.x*blockpixel;
+					pos.y = blockpos.y*blockpixel;
 					standing = 2;
 					facing = -1;
 					moving = -1;
@@ -178,8 +178,8 @@ void Player::update(int** map)
 					}
 					else if(map[blockpos.x][blockpos.y+1]==3||map[blockpos.x][blockpos.y+1]==103)
 						map[blockpos.x][blockpos.y+1] -= 1;
-					pos.x = blockpos.x*40;
-					pos.y = blockpos.y*40;
+					pos.x = blockpos.x*blockpixel;
+					pos.y = blockpos.y*blockpixel;
 					standing = 3;
 					facing = -1;
 					moving = -1;
@@ -194,8 +194,8 @@ void Player::update(int** map)
 					}
 					else if(map[blockpos.x][blockpos.y]==3||map[blockpos.x][blockpos.y]==103)
 						map[blockpos.x][blockpos.y] -= 1;
-					pos.x = blockpos.x*40+40;
-					pos.y = blockpos.y*40;
+					pos.x = blockpos.x*blockpixel+blockpixel;
+					pos.y = blockpos.y*blockpixel;
 					standing = 0;
 					facing = -1;
 					moving = -1;
@@ -210,8 +210,8 @@ void Player::update(int** map)
 					}
 					else if(map[blockpos.x][blockpos.y]==3||map[blockpos.x][blockpos.y]==103)
 						map[blockpos.x][blockpos.y] -= 1;
-					pos.x = blockpos.x*40;
-					pos.y = blockpos.y*40+40;
+					pos.x = blockpos.x*blockpixel;
+					pos.y = blockpos.y*blockpixel+blockpixel;
 					standing = 1;
 					facing = -1;
 					moving = -1;
@@ -263,8 +263,8 @@ void Player::update(int** map)
 
 void Player::update_blockpos()
 {
-	blockpos.x = pos.x/40;
-	blockpos.y = pos.y/40;
+	blockpos.x = pos.x/blockpixel;
+	blockpos.y = pos.y/blockpixel;
 }
 vec2d Player::get_blockpos()
 {
@@ -278,35 +278,35 @@ bool Player::check_pcollision(Player& p2, int** map)
 {
 	SDL_Rect col;
 	bool crash = false;
-	if(this->pos.x<=p2.pos.x+40&&this->pos.x>=p2.pos.x){
-		if(this->pos.y+40<=p2.pos.y+40&&this->pos.y+40>=p2.pos.y){
+	if(this->pos.x<=p2.pos.x+blockpixel&&this->pos.x>=p2.pos.x){
+		if(this->pos.y+blockpixel<=p2.pos.y+blockpixel&&this->pos.y+blockpixel>=p2.pos.y){
 			col.x = this->pos.x;
 			col.y = p2.pos.y;
-			col.w = p2.pos.x+40-this->pos.x;
-			col.h = this->pos.y+40-p2.pos.y;
+			col.w = p2.pos.x+blockpixel-this->pos.x;
+			col.h = this->pos.y+blockpixel-p2.pos.y;
 			crash = true;
 		}
-		else if(this->pos.y<=p2.pos.y+40&&this->pos.y>=p2.pos.y){
+		else if(this->pos.y<=p2.pos.y+blockpixel&&this->pos.y>=p2.pos.y){
 			col.x = this->pos.x;
 			col.y = this->pos.y;
-			col.w = p2.pos.x+40-this->pos.x;
-			col.h = p2.pos.y+40-this->pos.y;
+			col.w = p2.pos.x+blockpixel-this->pos.x;
+			col.h = p2.pos.y+blockpixel-this->pos.y;
 			crash = true;
 		}
 	}
-	else if(p2.pos.x<=this->pos.x+40&&p2.pos.x>=this->pos.x){
-		if(p2.pos.y+40<=this->pos.y+40&&p2.pos.y+40>=this->pos.y){
+	else if(p2.pos.x<=this->pos.x+blockpixel&&p2.pos.x>=this->pos.x){
+		if(p2.pos.y+blockpixel<=this->pos.y+blockpixel&&p2.pos.y+blockpixel>=this->pos.y){
 			col.x = p2.pos.x;
 			col.y = this->pos.y;
-			col.w = this->pos.x+40-p2.pos.x;
-			col.h = p2.pos.y+40-this->pos.y;
+			col.w = this->pos.x+blockpixel-p2.pos.x;
+			col.h = p2.pos.y+blockpixel-this->pos.y;
 			crash = true;
 		}
-		else if(p2.pos.y<=this->pos.y+40&&p2.pos.y>=this->pos.y){
+		else if(p2.pos.y<=this->pos.y+blockpixel&&p2.pos.y>=this->pos.y){
 			col.x = p2.pos.x;
 			col.y = p2.pos.y;
-			col.w = this->pos.x+40-p2.pos.x;
-			col.h = this->pos.y+40-p2.pos.y;
+			col.w = this->pos.x+blockpixel-p2.pos.x;
+			col.h = this->pos.y+blockpixel-p2.pos.y;
 			crash = true;
 		}
 	}
@@ -343,30 +343,30 @@ bool Player::collision(Player& p2, int** map)
 				switch(this->moving)
 				{
 					case 0:
-						ch1_t = (this->pos.x+40-p2.pos.x)/this->speed;
+						ch1_t = (this->pos.x+blockpixel-p2.pos.x)/this->speed;
 						break;
 					case 1:
-						ch1_t = (this->pos.y+40-p2.pos.y)/this->speed;
+						ch1_t = (this->pos.y+blockpixel-p2.pos.y)/this->speed;
 						break;
 					case 2:
-						ch1_t = (p2.pos.x+40-this->pos.x)/this->speed;
+						ch1_t = (p2.pos.x+blockpixel-this->pos.x)/this->speed;
 						break;
 					case 3:
-						ch1_t = (p2.pos.y+40-this->pos.y)/this->speed;
+						ch1_t = (p2.pos.y+blockpixel-this->pos.y)/this->speed;
 				}
 				switch(p2.moving)
 				{
 					case 0:
-						ch2_t = (p2.pos.x+40-this->pos.x)/p2.speed;
+						ch2_t = (p2.pos.x+blockpixel-this->pos.x)/p2.speed;
 						break;
 					case 1:
-						ch2_t = (p2.pos.y+40-this->pos.y)/p2.speed;
+						ch2_t = (p2.pos.y+blockpixel-this->pos.y)/p2.speed;
 						break;
 					case 2:
-						ch2_t = (this->pos.x+40-p2.pos.x)/p2.speed;
+						ch2_t = (this->pos.x+blockpixel-p2.pos.x)/p2.speed;
 						break;
 					case 3:
-						ch2_t = (this->pos.y+40-p2.pos.y)/p2.speed;
+						ch2_t = (this->pos.y+blockpixel-p2.pos.y)/p2.speed;
 						break;
 				}
 				if(ch1_t < ch2_t){
@@ -377,20 +377,20 @@ bool Player::collision(Player& p2, int** map)
 					switch(this->moving)
 					{
 						case 0:
-							p2.pos.x = this->pos.x+40;
+							p2.pos.x = this->pos.x+blockpixel;
 							p2.pos.y = this->pos.y;
 							break;
 						case 1:
 							p2.pos.x = this->pos.x;
-							p2.pos.y = this->pos.y+40;
+							p2.pos.y = this->pos.y+blockpixel;
 							break;
 						case 2:
-							p2.pos.x = this->pos.x-40;
+							p2.pos.x = this->pos.x-blockpixel;
 							p2.pos.y = this->pos.y;
 							break;
 						case 3:
 							p2.pos.x = this->pos.x;
-							p2.pos.y = this->pos.y-40;
+							p2.pos.y = this->pos.y-blockpixel;
 							break;
 					}
 					p2.moving = this->moving;
@@ -403,20 +403,20 @@ bool Player::collision(Player& p2, int** map)
 					switch(p2.moving)
 					{
 						case 0:
-							this->pos.x = p2.pos.x+40;
+							this->pos.x = p2.pos.x+blockpixel;
 							this->pos.y = p2.pos.y;
 							break;
 						case 1:
 							this->pos.x = p2.pos.x;
-							this->pos.y = p2.pos.y+40;
+							this->pos.y = p2.pos.y+blockpixel;
 							break;
 						case 2:
-							this->pos.x = p2.pos.x-40;
+							this->pos.x = p2.pos.x-blockpixel;
 							this->pos.y = p2.pos.y;
 							break;
 						case 3:
 							this->pos.x = p2.pos.x;
-							this->pos.y = p2.pos.y-40;
+							this->pos.y = p2.pos.y-blockpixel;
 							break;
 					}
 					this->moving = p2.moving;
@@ -440,16 +440,16 @@ bool Player::collision(Player& p2, int** map)
 				switch(p2.moving)
 				{
 					case 0:
-						p2.pos.x = this->pos.x+40;
+						p2.pos.x = this->pos.x+blockpixel;
 						break;
 					case 1:
-						p2.pos.y = this->pos.y+40;
+						p2.pos.y = this->pos.y+blockpixel;
 						break;
 					case 2:
-						p2.pos.x = this->pos.x-40;
+						p2.pos.x = this->pos.x-blockpixel;
 						break;
 					case 3:
-						p2.pos.y = this->pos.y-40;
+						p2.pos.y = this->pos.y-blockpixel;
 						break;
 				}
 				this->moving = (p2.moving+2)%4;
@@ -463,16 +463,16 @@ bool Player::collision(Player& p2, int** map)
 				switch(p2.moving)
 				{
 					case 0:
-						p2.pos.x = this->pos.x+40;
+						p2.pos.x = this->pos.x+blockpixel;
 						break;
 					case 1:
-						p2.pos.y = this->pos.y+40;
+						p2.pos.y = this->pos.y+blockpixel;
 						break;
 					case 2:
-						p2.pos.x = this->pos.x-40;
+						p2.pos.x = this->pos.x-blockpixel;
 						break;
 					case 3:
-						p2.pos.y = this->pos.y-40;
+						p2.pos.y = this->pos.y-blockpixel;
 						break;
 				}
 				this->moving = (p2.moving+2)%4;
@@ -488,16 +488,16 @@ bool Player::collision(Player& p2, int** map)
 				switch(this->moving)
 				{
 					case 0:
-						this->pos.x = p2.pos.x+40;
+						this->pos.x = p2.pos.x+blockpixel;
 						break;
 					case 1:
-						this->pos.y = p2.pos.y+40;
+						this->pos.y = p2.pos.y+blockpixel;
 						break;
 					case 2:
-						this->pos.x = p2.pos.x-40;
+						this->pos.x = p2.pos.x-blockpixel;
 						break;
 					case 3:
-						this->pos.y = p2.pos.y-40;
+						this->pos.y = p2.pos.y-blockpixel;
 						break;
 				}
 				p2.moving = (this->moving+2)%4;
@@ -510,16 +510,16 @@ bool Player::collision(Player& p2, int** map)
 				switch(this->moving)
 				{
 					case 0:
-						this->pos.x = p2.pos.x+40;
+						this->pos.x = p2.pos.x+blockpixel;
 						break;
 					case 1:
-						this->pos.y = p2.pos.y+40;
+						this->pos.y = p2.pos.y+blockpixel;
 						break;
 					case 2:
-						this->pos.x = p2.pos.x-40;
+						this->pos.x = p2.pos.x-blockpixel;
 						break;
 					case 3:
-						this->pos.y = p2.pos.y-40;
+						this->pos.y = p2.pos.y-blockpixel;
 						break;
 				}
 				p2.moving = (this->moving+2)%4;
@@ -543,7 +543,7 @@ bool Player::block_up(int** map, Player& p2, bool blue)
 	{
 		case 0:
 			if(map[blockpos.x-1][blockpos.y] == 0){
-				pos.x -=40;
+				pos.x -=blockpixel;
 				if(check_pcollision(p2, map) == false){
 					map[blockpos.x][blockpos.y] = 3;
 					if(blue) map[blockpos.x][blockpos.y] += 100;
@@ -559,8 +559,8 @@ bool Player::block_up(int** map, Player& p2, bool blue)
 						p2.hp-=this->atk;
 						map[blockpos.x][blockpos.y] = 3;
 						if(blue) map[blockpos.x][blockpos.y] += 100;
-						p2.pos.x = (blockpos.x-2)*40;
-						p2.pos.y = blockpos.y*40;
+						p2.pos.x = (blockpos.x-2)*blockpixel;
+						p2.pos.y = blockpos.y*blockpixel;
 						update_blockpos();
 						p2.update_blockpos();
 						p2.moving = 2;
@@ -571,8 +571,8 @@ bool Player::block_up(int** map, Player& p2, bool blue)
 						p2.hp-=this->atk*2;
 						map[blockpos.x][blockpos.y] = 3;
 						if(blue) map[blockpos.x][blockpos.y] += 100;
-						p2.pos.x = (blockpos.x-2)*40;
-						p2.pos.y = blockpos.y*40;
+						p2.pos.x = (blockpos.x-2)*blockpixel;
+						p2.pos.y = blockpos.y*blockpixel;
 						update_blockpos();
 						p2.update_blockpos();
 						p2.moving = 2;
@@ -581,14 +581,14 @@ bool Player::block_up(int** map, Player& p2, bool blue)
 				}
 				else{
 					std::cout<<"blockup failed"<<std::endl;
-					pos.x+=40;
+					pos.x+=blockpixel;
 					return false;
 				}
 			}
 			break;
 		case 1:
 			if(map[blockpos.x][blockpos.y-1] == 0){
-				pos.y-=40;
+				pos.y-=blockpixel;
 				if(check_pcollision(p2, map) == false){
 					map[blockpos.x][blockpos.y] = 3;
 					if(blue) map[blockpos.x][blockpos.y] += 100;
@@ -603,8 +603,8 @@ bool Player::block_up(int** map, Player& p2, bool blue)
 						p2.hp-=this->atk;
 						map[blockpos.x][blockpos.y] = 3;
 						if(blue) map[blockpos.x][blockpos.y] += 100;
-						p2.pos.x = (blockpos.x)*40;
-						p2.pos.y = (blockpos.y-2)*40;
+						p2.pos.x = (blockpos.x)*blockpixel;
+						p2.pos.y = (blockpos.y-2)*blockpixel;
 						update_blockpos();
 						p2.update_blockpos();
 						p2.moving = 3;
@@ -615,8 +615,8 @@ bool Player::block_up(int** map, Player& p2, bool blue)
 						p2.hp-=this->atk*2;
 						map[blockpos.x][blockpos.y] = 3;
 						if(blue) map[blockpos.x][blockpos.y] += 100;
-						p2.pos.x = (blockpos.x)*40;
-						p2.pos.y = (blockpos.y-2)*40;
+						p2.pos.x = (blockpos.x)*blockpixel;
+						p2.pos.y = (blockpos.y-2)*blockpixel;
 						update_blockpos();
 						p2.update_blockpos();
 						p2.moving = 3;
@@ -625,14 +625,14 @@ bool Player::block_up(int** map, Player& p2, bool blue)
 				}
 				else{
 					std::cout<<"blockup failed"<<std::endl;
-					pos.y+=40;
+					pos.y+=blockpixel;
 					return false;
 				}
 			}
 			break;
 		case 2:
 			if(map[blockpos.x+1][blockpos.y] == 0){
-				pos.x +=40;
+				pos.x +=blockpixel;
 				if(check_pcollision(p2, map) == false){
 					map[blockpos.x][blockpos.y] = 3;
 					if(blue) map[blockpos.x][blockpos.y] += 100;
@@ -648,8 +648,8 @@ bool Player::block_up(int** map, Player& p2, bool blue)
 						p2.hp-=this->atk;
 						map[blockpos.x][blockpos.y] = 3;
 						if(blue) map[blockpos.x][blockpos.y] += 100;
-						p2.pos.x = (blockpos.x+2)*40;
-						p2.pos.y = blockpos.y*40;
+						p2.pos.x = (blockpos.x+2)*blockpixel;
+						p2.pos.y = blockpos.y*blockpixel;
 						update_blockpos();
 						p2.update_blockpos();
 						p2.moving = 0;
@@ -660,8 +660,8 @@ bool Player::block_up(int** map, Player& p2, bool blue)
 						p2.hp-=this->atk*2;
 						map[blockpos.x][blockpos.y] = 3;
 						if(blue) map[blockpos.x][blockpos.y] += 100;
-						p2.pos.x = (blockpos.x+2)*40;
-						p2.pos.y = blockpos.y*40;
+						p2.pos.x = (blockpos.x+2)*blockpixel;
+						p2.pos.y = blockpos.y*blockpixel;
 						update_blockpos();
 						p2.update_blockpos();
 						p2.moving = 0;
@@ -670,14 +670,14 @@ bool Player::block_up(int** map, Player& p2, bool blue)
 				}
 				else{
 					std::cout<<"blockup failed"<<std::endl;
-					pos.x-=40;
+					pos.x-=blockpixel;
 					return false;
 				}
 			}
 			break;
 		case 3:
 			if(map[blockpos.x][blockpos.y+1] == 0){
-				pos.y+=40;
+				pos.y+=blockpixel;
 				if(check_pcollision(p2, map) == false){
 					map[blockpos.x][blockpos.y] = 3;
 					if(blue) map[blockpos.x][blockpos.y] += 100;
@@ -692,8 +692,8 @@ bool Player::block_up(int** map, Player& p2, bool blue)
 						p2.hp-=this->atk;
 						map[blockpos.x][blockpos.y] = 3;
 						if(blue) map[blockpos.x][blockpos.y] += 100;
-						p2.pos.x = (blockpos.x)*40;
-						p2.pos.y = (blockpos.y+2)*40;
+						p2.pos.x = (blockpos.x)*blockpixel;
+						p2.pos.y = (blockpos.y+2)*blockpixel;
 						update_blockpos();
 						p2.update_blockpos();
 						p2.moving = 1;
@@ -704,8 +704,8 @@ bool Player::block_up(int** map, Player& p2, bool blue)
 						map[blockpos.x][blockpos.y] = 3;
 						p2.hp-=this->atk*2;
 						if(blue) map[blockpos.x][blockpos.y] += 100;
-						p2.pos.x = (blockpos.x)*40;
-						p2.pos.y = (blockpos.y+2)*40;
+						p2.pos.x = (blockpos.x)*blockpixel;
+						p2.pos.y = (blockpos.y+2)*blockpixel;
 						update_blockpos();
 						p2.update_blockpos();
 						p2.moving = 1;
@@ -714,7 +714,7 @@ bool Player::block_up(int** map, Player& p2, bool blue)
 				}
 				else{
 					std::cout<<"blockup failed"<<std::endl;
-					pos.y-=40;
+					pos.y-=blockpixel;
 					return false;
 				}
 			}

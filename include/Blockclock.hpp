@@ -25,7 +25,7 @@ public:
 	Blockclock(vec2f pos, SDL_Texture* c_tex, float c_w, float c_h, int most);
 	int get_now();
 	void update();
-	void minus();
+	Blockclock& operator--();
 private:
 	int now;
 	int most;

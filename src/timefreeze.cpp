@@ -1,14 +1,15 @@
 #include "Timefreeze.hpp"
 
-Timefreeze::Timefreeze(vec2f b_pos, SDL_Texture* b_tex, float b_w, float b_h):Entity(b_pos, b_tex, b_w, b_h)
+Timefreeze::Timefreeze(vec2f b_pos, SDL_Texture* b_tex, float b_w, float b_h)
+:Entity(b_pos, b_tex, b_w, b_h)
 {
-	cd=2000;
 	divide=1.5;
 	can_shoot=true;
 	has_divided=false;
+	cd=2000;
 	lasting=500;
-	spdtemp=5;//oppo->get_speed();
 	able=false;
+	spdtemp=5;//oppo->get_speed();
 }
 void Timefreeze::update(){
 	if(is_on==true){

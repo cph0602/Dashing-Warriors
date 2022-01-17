@@ -68,4 +68,5 @@ private:
 	int move_itr;
 	int ppb;
 	bool can_shoot;
+	const int blockpixel = 40;
 };

@@ -633,12 +633,12 @@ int main(int argc, char* args[]){
 													sblock[wts].spawn(tbp);
 													sblock[wts].shoot(purp_ch.absdir(), ground.land);
 													cout<<"wts = "<<wts<<endl;
-													pclock.minus();
+													--pclock;
 													if(purp_ch.get_moving() == -1) purple_shot = true;
 												}
 												else if(sblock[wts].able(purp_ch.absdir(), tbp, ground.land) == false && purp_ch.get_moving() == -1 && (purp_ch.get_facing() == -1 || purp_ch.get_facing() == 1)){
 													if(purp_ch.block_up(ground.land, blue_ch, false)){
-														pclock.minus();
+														--pclock;
 														if(purp_ch.get_facing() != -1) purple_shot = true;
 													}
 												}
@@ -663,12 +663,12 @@ int main(int argc, char* args[]){
 													sbblock[bts].spawn(tbp);
 													sbblock[bts].shoot(blue_ch.absdir(), ground.land);
 													cout<<"bts = "<<bts<<endl;
-													bclock.minus();
+													--bclock;
 													if(blue_ch.get_moving() == -1) blue_shot = true;
 												}
 												else if(sbblock[bts].able(blue_ch.absdir(), tbp, ground.land) == false && blue_ch.get_moving() == -1 && (blue_ch.get_facing() == -1 || blue_ch.get_facing() == 1)){
 													if(blue_ch.block_up(ground.land, purp_ch, true)){
-														bclock.minus();
+														--bclock;
 														if(blue_ch.get_facing()!=-1) blue_shot = true;
 													}
 												}

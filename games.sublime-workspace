@@ -201,6 +201,17 @@
 	},
 	"file_history":
 	[
+		"/C/Users/angry/OneDrive/桌面/hwpaper/homework-lipopo-checked/src/timefreeze.cpp",
+		"/C/Users/angry/OneDrive/桌面/hwpaper/homework-lipopo-checked/src/main.cpp",
+		"/C/Users/angry/OneDrive/桌面/hwpaper/homework-lipopo-checked/src/blockclock.cpp",
+		"/C/Users/angry/OneDrive/桌面/hwpaper/homework-lipopo-checked/include/Blockclock.hpp",
+		"/C/Users/angry/OneDrive/桌面/hwpaper/homework-lipopo-checked/src/player.cpp",
+		"/C/Users/angry/OneDrive/桌面/hwpaper/homework-lipopo-checked/include/Player.hpp",
+		"/C/Users/angry/OneDrive/桌面/hwpaper/homework-lipopo-checked/include/Math.hpp",
+		"/C/Users/angry/OneDrive/桌面/hwpaper/homework-lipopo-checked/src/entity.cpp",
+		"/C/Users/angry/OneDrive/桌面/hwpaper/homework-lipopo-checked/include/Entity.hpp",
+		"/C/Users/angry/OneDrive/桌面/hwpaper/homework-lipopo-checked/include/Shootblock.hpp",
+		"/C/Users/angry/OneDrive/桌面/hwpaper/homework-lipopo-checked/src/shootblock.cpp",
 		"/C/Users/lipoh/OneDrive/桌面/Final project/完整版/include/Math.hpp",
 		"/C/Users/lipoh/OneDrive/桌面/Final project/完整版/src/main.cpp",
 		"/C/Users/lipoh/OneDrive/桌面/Final project/完整版/src/choosestate.cpp",
@@ -270,7 +281,7 @@
 	],
 	"find":
 	{
-		"height": 49.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -284,6 +295,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"40",
 			"const",
 			"check_collision",
 			"pos",
@@ -308,7 +320,7 @@
 	},
 	"incremental_find":
 	{
-		"height": 36.0
+		"height": 34.0
 	},
 	"input":
 	{
@@ -339,7 +351,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 188.0
+		"height": 231.0
 	},
 	"output.find_results":
 	{
@@ -348,7 +360,7 @@
 	"pinned_build_system": "Build Debug",
 	"replace":
 	{
-		"height": 68.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -385,7 +397,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 153.0,
+	"side_bar_width": 204.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

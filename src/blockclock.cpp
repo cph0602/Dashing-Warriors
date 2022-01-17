@@ -1,6 +1,7 @@
 #include "Blockclock.hpp"
 
-Blockclock::Blockclock(vec2f pos, SDL_Texture* c_tex, float c_w, float c_h, int most):Entity( pos, c_tex, c_w, c_h)
+Blockclock::Blockclock(vec2f pos, SDL_Texture* c_tex, float c_w, float c_h, int most)
+:Entity( pos, c_tex, c_w, c_h)
 {
 	this->most=most;
 	now=5;
@@ -25,6 +26,8 @@ void Blockclock::update(){
 		Alterframe(currentframe);
 	}
 }
-void Blockclock::minus(){
-	now-=1;
+Blockclock& Blockclock::operator--()
+{
+	if(now>0){now-=1;}
+	return *this;
 }
